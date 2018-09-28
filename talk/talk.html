@@ -40,10 +40,11 @@
 			$('.talk_main_titlexiao').click(function(){
 				var indexs=$(this).attr('index');
 				var obj2=$(this);
-				obj2.css('display','none');
-				$('$task_left').append('<div class="xiaokuang" indexback='+indexs+'></div>');
-				$('$task_left').on('click','[indexback='+indexs+']',function(){
-//					obj2.css('display','block')
+				obj2.parents('.talk_main').css('display','none');
+				var str='<div class="xiaokuang" indexback='+indexs+'></div>';
+				$('#task_left').append(str);
+				$('#task_left').on('click','[indexback='+indexs+']',function(){
+					obj2.parents('.talk_main').css('display','block')
 				})
 			})
 		})
