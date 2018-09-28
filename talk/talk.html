@@ -39,23 +39,29 @@
 			})
 			$('.talk_main_titlexiao').click(function(){
 				var indexs=$(this).attr('index');
+				var strname=$(this).siblings('.talk_main_titlename').html();
 				var obj2=$(this);
 				obj2.parents('.talk_main').css('display','none');
-				var str='<div class="xiaokuang" indexback='+indexs+'></div>';
+				var str='<div class="xiaokuang" indexback='+indexs+'>'+strname+'</div>';
 				$('#task_left').append(str);
 				$('#task_left').on('click','[indexback='+indexs+']',function(){
-					obj2.parents('.talk_main').css('display','block')
+					$('.talk_main').css('z-index',1000);
+					obj2.parents('.talk_main').css({'display':'block','z-index':10000});
+					$('[indexback='+indexs+']').remove();
 				})
+			})
+			
+			
+			$('.talk_main_titlecha').click(function(){
+				$(this).parents('.talk_main').remove();
 			})
 		})
 	</script>
 	<body>
 		<div class="talk_main">
 			<div class="talk_main_title">
-				<span class="talk_main_titlename">
-					用户名
-				</span>
-				<span class="talk_main_titlecha">
+				<span class="talk_main_titlename">用户名</span>
+				<span class="talk_main_titlecha" title="关闭">
 					×
 				</span>
 				<span class="talk_main_titlexiao" index=1 title="缩小">
