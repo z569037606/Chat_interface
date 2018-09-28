@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" type="text/css" href="talk.css"/>
+		<title></title>
+		<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+	</head>
+	<script>
+		$(function(){
+			$('.talk_main').click(function(){
+				$('.talk_main').css('z-index',1000);
+				$(this).css('z-index',10000);
+			})
+			  
+			$('.talk_main_title').mousedown(function(e){
+				$('.talk_main').css('z-index',1000);
+				$(this).parent('.talk_main').css('z-index',10000);
+				var pageleft= $(this).offset().left;
+				var pagetop= $(this).offset().top;
+				var mouseleft=e.pageX;
+				var mousetop=e.pageY;
+				var obj=$(this);
+				$(document).mousemove(function(e){
+					var changex=e.pageX-mouseleft;
+					var changey=e.pageY-mousetop;
+					obj.parent('.talk_main').css({'left':pageleft+changex+'px','top':pagetop+changey+'px'});
+				})
+			})
+			$(document).mouseup(function(){
+				$(this).off('mousemove')
+			})
+			
+			$('.talk_main_titlecha').mousedown(function(){
+				return false;
+			})
+			$('.talk_main_titlexiao').mousedown(function(){
+				return false;
+			})
+			$('.talk_main_titlexiao').click(function(){
+				var indexs=$(this).attr('index');
+				var obj2=$(this);
+				obj2.css('display','none');
+				$('$task_left').append('<div class="xiaokuang" indexback='+indexs+'></div>');
+				$('$task_left').on('click','[indexback='+indexs+']',function(){
+//					obj2.css('display','block')
+				})
+			})
+		})
+	</script>
+	<body>
+		<div class="talk_main">
+			<div class="talk_main_title">
+				<span class="talk_main_titlename">
+					用户名
+				</span>
+				<span class="talk_main_titlecha">
+					×
+				</span>
+				<span class="talk_main_titlexiao" index=1 title="缩小">
+					-
+				</span>
+			</div>
+		</div>
+		<div class="talk_main">
+			<div class="talk_main_title">
+				<span class="talk_main_titlename">
+					用户名
+				</span>
+				<span class="talk_main_titlecha" title="关闭">
+					×
+				</span>
+				<span class="talk_main_titlexiao" index=2 title="缩小">
+					-
+				</span>
+			</div>
+		</div>
+		
+		
+		
+		
+		<!--底部任务栏-->
+		<div id="task">
+			<div id="task_left">
+				<!--<div class="xiaokuang"></div>-->
+			</div>
+		</div>
+	</body>
+</html>
